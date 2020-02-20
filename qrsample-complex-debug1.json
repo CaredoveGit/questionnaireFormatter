@@ -1,0 +1,32 @@
+{
+	"id": "OC",
+	"resourceType": "QuestionnaireResponse",
+	"status": "completed",
+	"authored": "2020-02-14T11:15:53-05:00",
+	"item": [
+		{
+			"linkId": "item45518187",
+			"text": "Ostomy Care Protocol: change flange weekly and PRN, provide health teaching"
+		},
+		{
+			"linkId": "nursingOstomyRequest",
+			"text": "Ostomy Care Request:",
+			"answer": [
+				{
+					"valueString": "Other Order(s)",
+					"item": [
+						{
+							"linkId": "nursingOstomyRequestSpecificOrders",
+							"text": "Specify Order(s):",
+							"answer": [
+								{
+									"valueString": "Specific Protocol"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
