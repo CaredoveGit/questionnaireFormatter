@@ -14,6 +14,7 @@ const qrSampleSimpleRequestURL = 'qrsample-simple.json';
 const qrSampleMediumRequestURL = 'qrsample-medium.json';
 const qrSampleComplexRequestURL = 'qrsample-complex.json';
 const qrFHIRNorth2019ExerciseURL = 'fhirnorth2019.json';
+const qrSampleComplexNestRequestURL = 'qrsample-complex-nest.json';
 
 getJSONData(qrSampleRequestURL);
 
@@ -57,8 +58,8 @@ qrDropdownBox.addEventListener('change', event => {
     if (result == 6) {
         getJSONData(qrSampleComplexRequestURL);
     }
-    if (result == 7) {
-        getJSONData(qrFHIRNorth2019ExerciseURL);
+    if (result == 8) {
+        getJSONData(qrSampleComplexNestRequestURL);
     }
 });
 
@@ -68,10 +69,17 @@ qrSubmitButton.addEventListener('click', function(event) {
 
     // Populate the page with new data taken from the textview
     let updateText = qrJSONInput.value;
+    try{
     let updatedJSON = JSON.parse(updateText);
     populateResponse(updatedJSON);
-});
+    }
+    catch(err)
+    {
+        errors.push(err);
+        handleErrors();
+    }
 
+});
 /* Parse through the JSON file, checking for nested and conditional properties,
 then displaying all of the response contents to a section on the page */
 function populateResponse(jsonObj) {
@@ -79,7 +87,7 @@ function populateResponse(jsonObj) {
      *
      * @param {object} questionnaireResponse
      */
-    qrRuleErrorDiv.style.display="none";
+
     const parse = questionnaireResponse => {
         if (questionnaireResponse.item) {
             parseItem(questionnaireResponse.item, 0);
@@ -100,7 +108,16 @@ function populateResponse(jsonObj) {
                 qrSection.appendChild(line);
                 //Check for rule error - (answer.exists() and item.exists()).not()
                 if (i.answer[0].hasOwnProperty('item') && i.item) {
-                    qrRuleErrorDiv.style.display="inline-block";
+                errsource = '';
+                if(item[0].linkID)
+                {
+                    pitemid = item[0].linkID;
+                }else
+                {
+                    pitemid = item[0].linkId;
+                }
+                errsource = '<table width="35%" ><tr><td><i>Items in Error</i></td><td><b>linkID</b></td></tr><tr><td width="75%"><b>Parent Item</b></td><td>'+pitemid+'</td></tr><tr><td>'+'<b>SubItem</b></td><td>'+i.item[0].linkID+'</td></tr><tr><td>'+'<b>Answer SubItem</b></td><td>'+i.answer[0].item[0].linkID+'</td></tr></table>'
+                   errors.push('An answer cannot have a child item at the same time the answer parent item has a child item. </br> A Nested item cannot be beneath both item and answer.</br></br>'+errsource+'</br> Please review this guideline for more information:</br> <a href="https://www.hl7.org/fhir/questionnaireresponse.html#invs" target="_blank">FHIR Questionnaire Respsonse</a>')
                 }
                 if (i.answer[0].hasOwnProperty('item')) {
                     let answer = renderAnswer(i.answer[0], depth);
@@ -162,43 +179,6 @@ function populateResponse(jsonObj) {
                     let answerHTML = renderAnswer(e, depth);
                     line.appendChild(answerHTML);
                 }
-            }
-        });
-    };
-
-    /**
-     *
-     * @param {object} item
-     * @param {integer} depth
-     */
-    const parseItemWithSubQuestion = (item, depth) => {
-        console.log('Depth: %s', depth.toString());
-        console.log('ITEM WITH SUB QUESTION');
-
-        item.forEach(i => {
-            if (i.answer) {
-                // sub-questions and answers
-                let line = renderQuestion(i, depth);
-                line.style.marginLeft = (depth * 2).toString() + 'em';
-                qrSection.appendChild(line);
-
-                i.answer.forEach(e => {
-                    // Multi-select answers
-                    if (i.answer.length > 1 && i.answer.indexOf(e) != i.answer.length - 1) {
-                        let answerHTML = renderMultiAnswer(e, depth);
-                        line.appendChild(answerHTML);
-
-                        // Single answers
-                    } else {
-                        let answerHTML = renderAnswer(e, depth);
-                        line.appendChild(answerHTML);
-                    }
-                });
-                console.log('SUB ITEM ANSWER RENDERED');
-            }
-
-            if (i.item) {
-                // parseItem(i.item, depth + 1);
             }
         });
     };
@@ -378,21 +358,16 @@ function handleErrors() {
         console.log(errors);
         clearJSONResults();
 
-        if (errors.length > 1) {
+        if (errors.length > 0) {
             let line = document.createElement('h1');
             line.textContent = errors.length.toString() + ' errors were detected:';
             line.style.color = 'red';
             qrSection.appendChild(line);
-        } else {
-            let line = document.createElement('h1');
-            line.textContent = errors.length.toString() + ' error was detected:';
-            line.style.color = 'red';
-            qrSection.appendChild(line);
-        }
+        } 
 
         errors.forEach(e => {
             let line = document.createElement('p');
-            line.textContent = e;
+            line.innerHTML = e;
             line.style.color = 'red';
             let question = document.createElement('span');
             question.classList.add('question');
