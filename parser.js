@@ -96,16 +96,25 @@ function populateResponse(jsonObj) {
             if (i.answer) {
                 let line = renderQuestion(i, depth);
                 qrSection.appendChild(line);
-
+                if (i.answer[0].hasOwnProperty('item')&& i.item) {
+                    alert("Stop ya idget! You broke the rules!!!");
+                }
                 if (i.answer[0].hasOwnProperty('item')) {
                     let answer = renderAnswer(i.answer[0], depth);
                     line.appendChild(answer);
                 }
                 parseAnswer(i.answer, line, depth + 1);
+                 
+            }else
+            {
+                if (!i.item) {
+                    let line = renderText(i, depth);
+                    qrSection.appendChild(line);
+                 }
             }
 
             if (i.item) {
-                // headers
+                 // headers
                 if (depth < 1) {
                     if (!i.answer) {
                         let line = renderHeader(i, depth);
@@ -294,6 +303,19 @@ function renderQuestion(obj, depth) {
     return line;
 }
 
+function renderText(obj, depth) {
+    console.log('Depth: %s', depth.toString());
+    let { text } = obj;
+    let line = document.createElement('p');
+    line.style.marginLeft = (depth * 2).toString() + 'em';
+    let textblock = document.createElement('span');
+    textblock.classList.add('text');
+    textblock.textContent = text ;
+    
+    line.appendChild(textblock);
+
+    return line;
+}
 /**
  * Takes an item object, displays a header on the page, creating an h1 element,
  * and then returning the header as an object
