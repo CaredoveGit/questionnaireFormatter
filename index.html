@@ -43,16 +43,48 @@
         </div>
        
         <section id="QuestionnaireResponse"></section>
-      
+        <div class="container about">
+            <div class="smallcontainer">
+                <h1></h1>
+                <p>
+        
+
+       
+        
+         
+       
         <div class="container about">
             <div class="smallcontainer">
                 <h1>ABOUT</h1>
                 <p>
-                    The QuestionnaireResponse formatter was created to help with debugging HL7 FHIR
-                    QuestionnaireResponse payloads, which hold ad-hoc structured data. This little
-                    tool hoped to solve the problem of helping to visualize the contents of a
-                    QuestionnaireResponse.item element in a way that might be displayed and read in
-                    an application by human beings.
+                    The QuestionaireResponse formatter applet was created to help with debugging HL7 FHIR QuestionnaireResponse payloads, by rendering independent QuestionnaireResponses on-screen in a way that might be read by human beings. The QuestionnaireResponse is rendered without a corresponding HL7 FHIR Questionnaire resource.
+                </p>
+                <p> Display Elements
+                    When a QuestionnaireResponse is handled independent of its Questionnaire, there are 4 types of data to format differently on-screen to a user:</br>                  
+                    
+                    Standard Questions: Use item.text for the question, and item.answer[] for the answer(s). no item.item[] allowed</br>
+                    Nested Questions: In a standard question item, put the nested questions into item.answer[].item[]. no item.item[] allowed</br>
+                    Group Headers Use item.text for the header text, and include its grouped questions in item.item[]. no item.answer[] allowed</br>
+                    Display Text: Use item.text for the header text, without item.item[] and without item.answer[].</br>
+                    
+                </p>
+                <p>
+                    For display format in the QuestionaireResponse formatter: </br>
+                    1) standard questions are displayed as {bold}-question : {normal}-answer </br>
+                    2) nested questions are indented </br>
+                    3) group headers are large header style </br>
+                    4) display-text are italics</br>
+      
+                </p>
+                <p>
+                    Important Notes</br>
+        
+                    A QuestionnaireResponse.item may NOT have both an item and an answer.</br>
+                    expression: (answer.exists() and item.exists()).not()</br></br>
+                    
+                    The only content that should be in a completed QuestionnaireResponse are the questions that have answers and any groups that contain them (to allow appropriate organizing of the grouped questions). In other words, a Questionnaire question presented to the user without an answer should NOT have a corresponding item in QuestionnaireResponse.</br>
+                    Display-text cannot have nested children.</br>
+                    The only way to know what question value sets options were presented to the user, or if there were are unanswered questions, is the cross-reference the QuestionnaireResponse with a Questionnaire.</br>
                 </p>
                 <p>
                     Note that this tool is intended for a QuestionnaireResponse that does NOT
