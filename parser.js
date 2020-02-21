@@ -3,6 +3,7 @@ var qrSection = document.getElementById('QuestionnaireResponse');
 var qrJSONInput = document.getElementById('jsonInput');
 var qrSubmitButton = document.getElementById('submit');
 var qrDropdownBox = document.getElementById('jsonDropdown');
+var qrRuleErrorDiv = document.getElementById('ruleErrorDiv');
 var errors = [];
 
 // Initial JSON load
@@ -78,6 +79,7 @@ function populateResponse(jsonObj) {
      *
      * @param {object} questionnaireResponse
      */
+    qrRuleErrorDiv.style.display="none";
     const parse = questionnaireResponse => {
         if (questionnaireResponse.item) {
             parseItem(questionnaireResponse.item, 0);
@@ -96,8 +98,9 @@ function populateResponse(jsonObj) {
             if (i.answer) {
                 let line = renderQuestion(i, depth);
                 qrSection.appendChild(line);
-                if (i.answer[0].hasOwnProperty('item')&& i.item) {
-                    alert("Stop ya idget! You broke the rules!!!");
+                //Check for rule error - (answer.exists() and item.exists()).not()
+                if (i.answer[0].hasOwnProperty('item') && i.item) {
+                    qrRuleErrorDiv.style.display="inline-block";
                 }
                 if (i.answer[0].hasOwnProperty('item')) {
                     let answer = renderAnswer(i.answer[0], depth);

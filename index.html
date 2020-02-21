@@ -40,9 +40,14 @@
                 </div>
             </div>
         </div>
-
+        <div id="ruleErrorDiv"  class="container error">
+          <b>There is an FHIR Rule error in this Questionnaire Response:</b></br>
+            An answer cannot have a child item at the same time the answer parent item has a child item.
+            A Nested item can't be beneath both item and answer.</br></br>	
+            Please review this guideline for more information:</br> <a href='https://www.hl7.org/fhir/questionnaireresponse.html#invs' target='_blank'>FHIR Questionnaire Respsonse</a>
+         </div>
         <section id="QuestionnaireResponse"></section>
-
+      
         <div class="container about">
             <div class="smallcontainer">
                 <h1>ABOUT</h1>

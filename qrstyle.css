@@ -110,6 +110,11 @@ section p {
     padding-bottom: 2em;
 }
 
+.error {
+    background-color: #FFA42A;
+    padding-bottom: 2em;
+}
+
 .smallcontainer {
     width: 50%;
     margin: 0 auto;
