@@ -22,6 +22,7 @@
                 <div class="row">
                     <select id="jsonDropdown">
                         <option value="8">Standard Questions Sample</option>
+                        <option value="1">Data Type Sample</option>
                         <option value="9">Display Text Sample</option>
                         <option value="10">Group Headers Sample</option>
                         <option value="11">Sub-Question Sample</option>
@@ -71,16 +72,19 @@
         
                     A QuestionnaireResponse.item may NOT have both an item and an answer.</br>
                     expression: <span style="color: crimson; background-color:rgb(255, 213, 213);">(answer.exists() and item.exists()).not()</span></br></br>
-                    
-                    The only content that should be in a completed QuestionnaireResponse are the questions that have answers and any groups that contain them (to allow appropriate organizing of the grouped questions). In other words, a Questionnaire question presented to the user without an answer should NOT have a corresponding item in QuestionnaireResponse.</br>
-                    Display-text cannot have nested children.</br>
-                    The only way to know what question value sets options were presented to the user, or if there were are unanswered questions, is the cross-reference the QuestionnaireResponse with a Questionnaire.</br>
-                </p>
-                <p>
+                    <ul>
+                    <li>The only content that should be in a completed QuestionnaireResponse are the questions that have answers and any groups that contain them (to allow appropriate organizing of the grouped questions). In other words, a Questionnaire question presented to the user without an answer should NOT have a corresponding item in QuestionnaireResponse.</br>
+                    Display-text cannot have nested children.</li>
+                    <li>The only way to know what question value sets options were presented to the user, or if there were are unanswered questions, is the cross-reference the QuestionnaireResponse with a Questionnaire.</li>
+               
+                    <li>
                     Note that this tool is intended for a QuestionnaireResponse that does NOT
-                    reference a corresponding Questionnaire resource. Rather, all of the elements
+                    </li>
+                    <li>The only way to know what question value sets options were presented to the user, or if there were are unanswered questions, is the cross-reference the QuestionnaireResponse with a Questionnaire.</li>
+                    reference a corresponding Questionnaire resource. </li><li>Rather, all of the elements
                     that a user needs to interpret the meaning of a data point (i.e., headers,
                     question text, answer text) is included in the QuestionnaireResponse payload.
+                    </ul>
                 </p>
                 <p>
                     Learn more about
