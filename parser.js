@@ -136,13 +136,13 @@ function populateResponse(jsonObj) {
                     {
                         pitemid = item[counter].linkId;
                     }
-                    if(i.item[counter].linkID!==undefined)
+                    if(i.item[0].linkID!==undefined)
                     {
-                        subitemid = i.item[counter].linkID;
+                        subitemid = i.item[0].linkID;
                     }
-                    else if(i.item[counter].linkId!==undefined)                    
+                    else if(i.item[0].linkId!==undefined)                    
                     {
-                        subitemid = i.item[counter].linkId;
+                        subitemid = i.item[0].linkId;
                     }
                     errsource = '<table width="35%" ><tr><td><i>Items in Error</i></td><td><b>linkID</b></td></tr><tr><td width="75%"><b>Parent Item</b></td><td>'+pitemid+'</td></tr><tr><td>'+'<b>SubItem</b></td><td>'+subitemid+'</td></tr></table>'
                     errors.push('A Nested item cannot be beneath both item and answer.</br></br>'+errsource+'</br> Please review this guideline for more information:</br> <a href="https://www.hl7.org/fhir/questionnaireresponse.html#invs" target="_blank">FHIR Questionnaire Respsonse</a>')
