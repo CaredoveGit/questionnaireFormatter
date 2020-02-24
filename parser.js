@@ -127,10 +127,11 @@ function populateResponse(jsonObj) {
                 if (i.item) 
                 {
                     errsource = '';
-                    if(item[0].hasAttribute("linkID"))
+                    if(item[0].linkID!==undefined)
                     {
                         pitemid = item[0].linkID;
-                    }else
+                    }
+                    else (item[0].linkId!==undefined)                    
                     {
                         pitemid = item[0].linkId;
                     }
