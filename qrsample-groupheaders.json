@@ -64,32 +64,22 @@
                     {
                       "answer" : [
                         {
-                          "valueString" : "Answer C1",
-                          "item" : [
-                            {
-                              "linkId" : "3.1",
-                              "text" : "Question 1.1.0",
-                              "answer" : [
-                                {
-                                  "valueString" : "Answer 1.1.0"
-                                }
-                              ]
-                            },
-                            {
-                              "linkId" : "3.2",
-                              "text" : "Question 1.2.0",
-                              "answer" : [
-                                {
-                                  "valueString" : "Answer 1.2.0"
-                                }
-                              ]
-                            }
-                          ]
+                          "valueString" : "Answer C1"
+                          
                         }
                       ],
                       "text" : "Question C1",
                       "linkID" : "B3"
-                    }
+                    },
+                      {
+                        "linkId" : "3.1",
+                        "text" : "Question C2",
+                        "answer" : [
+                          {
+                            "valueString" : "Answer C2"
+                          }
+                        ]
+                      }
                   ]
                 }
               ]
