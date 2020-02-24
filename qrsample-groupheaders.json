@@ -2,13 +2,13 @@
   "status" : "completed",
   "basedOn" : [
     {
-      "reference" : "ServiceRequest/365985"
+      "reference" : "ServiceRequest\/365985"
     }
   ],
   "id" : "7674cab2-cc1f-4f7c-969d-62a4988501e9",
   "identifier" : [
     {
-      "system" : "http://example.org/fhir/NamingSystem/questionnaire-ids",
+      "system" : "http:\/\/example.org\/fhir\/NamingSystem\/questionnaire-ids",
       "value" : "414692"
     }
   ],
@@ -16,147 +16,87 @@
   "resourceType" : "QuestionnaireResponse",
   "item" : [
     {
-      "linkId" : "3",
-      "text" : "Question 1.0.0",
-      "answer" : [
+      "linkId" : "A",
+      "text" : "Section A Header",
+      "item" : [
         {
-          "valueString" : "Answer 1.0.1",
-          "item" : [
+          "answer" : [
             {
-              "linkId" : "A",
-              "text" : "Section A Header",
-              "item" : [
-                {
-                  "answer" : [
-                    {
-                      "valueString" : "Answer A1"
-                    }
-                  ],
-                  "text" : "Question A1",
-                  "linkID" : "A1"
-                },
-                {
-                  "answer" : [
-                    {
-                      "valueString" : "Answer A2"
-                    }
-                  ],
-                  "text" : "Question A2",
-                  "linkID" : "A2"
-                }
-              ]
-            },
-            {
-              "linkId" : "B",
-              "text" : "Section B Header",
-              "item" : [
-                {
-                  "answer" : [
-                    {
-                      "valueString" : "Answer B1"
-                    }
-                  ],
-                  "text" : "Question B1",
-                  "linkID" : "B1"
-                },
-                {
-                  "answer" : [
-                    {
-                      "valueString" : "Answer B2"
-                    }
-                  ],
-                  "text" : "Question B2",
-                  "linkID" : "B2"
-                },
-                {
-                  "item" : [
-                    {
-                      "answer" : [
-                        {
-                          "valueString" : "Answer C1"
-                        }
-                      ],
-                      "text" : "Answer C1",
-                      "linkID" : "B3"
-                    }
-                  ],
-                  "text" : "Subsection C Header",
-                  "linkID" : "B3"
-                }
-              ]
+              "valueString" : "Answer A1"
             }
-          ]
+          ],
+          "text" : "Question A1",
+          "linkID" : "A1"
         },
         {
-          "item" : [
+          "answer" : [
             {
-              "linkId" : "3.1",
-              "text" : "Question 1.1.0",
-              "answer" : [
-                {
-                  "valueString" : "Answer 1.1.0"
-                }
-              ]
-            },
-            {
-              "linkId" : "3.2",
-              "text" : "Question 1.2.0",
-              "answer" : [
-                {
-                  "valueString" : "Answer 1.2.0"
-                }
-              ]
+              "valueString" : "Answer A2"
             }
-          ]
+          ],
+          "text" : "Question A2",
+          "linkID" : "A2"
         }
       ]
     },
     {
-      "linkId" : "3",
-      "text" : "Question 2.0.0",
-      "answer" : [
+      "linkId" : "B",
+      "text" : "Section B Header",
+      "item" : [
         {
-          "valueString" : "Answer 2.0.0",
-          "item" : [
+          "answer" : [
             {
-              "linkId" : "3.1",
-              "text" : "Question 2.1.0",
-              "answer" : [
-                {
-                  "valueString" : "Answer 2.1.0"
-                }
-              ]
-            },
+              "valueString" : "Answer B1"
+            }
+          ],
+          "text" : "Question B1",
+          "linkID" : "B1"
+        },
+        {
+          "answer" : [
             {
-              "linkId" : "3.2",
-              "text" : "Question 2.2.0",
-              "answer" : [
+              "valueString" : "Answer B2",
+              "item" : [
                 {
-                  "valueString" : "Answer 2.2.0",
+                  "linkID" : "B3",
+                  "text" : "Subsection C Header",
                   "item" : [
                     {
-                      "linkId" : "3.1",
-                      "text" : "Question 2.2.1",
                       "answer" : [
                         {
-                          "valueString" : "Answer 2.2.1"
+                          "valueString" : "Answer C1",
+                          "item" : [
+                            {
+                              "linkId" : "3.1",
+                              "text" : "Question 1.1.0",
+                              "answer" : [
+                                {
+                                  "valueString" : "Answer 1.1.0"
+                                }
+                              ]
+                            },
+                            {
+                              "linkId" : "3.2",
+                              "text" : "Question 1.2.0",
+                              "answer" : [
+                                {
+                                  "valueString" : "Answer 1.2.0"
+                                }
+                              ]
+                            }
+                          ]
                         }
-                      ]
-                    },
-                    {
-                      "linkId" : "3.2",
-                      "text" : "Question 2.2.2",
-                      "answer" : [
-                        {
-                          "valueString" : "Answer 2.2.2"
-                        }
-                      ]
+                      ],
+                      "text" : "Question C1",
+                      "linkID" : "B3"
                     }
                   ]
                 }
               ]
             }
-          ]
+          ],
+          "text" : "Question B2",
+          "linkID" : "B2"
         }
       ]
     }
