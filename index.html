@@ -21,17 +21,12 @@
                 </div>
                 <div class="row">
                     <select id="jsonDropdown">
-                        <option value="1">Sample Payload</option>
-                        <option value="2">Sample Payload without headers</option>
+                        <option value="8">Standard Questions Sample</option>
+                        <option value="9">Display Text Sample</option>
+                        <option value="10">Group Headers Sample</option>
+                        <option value="11">Sub-Question Sample</option>
+                        <option value="12">Sub-Question Error Sample</option>
                         <option value="3">Example Homecare Referral</option>
-                        <option value="4">Simple Payload</option>
-                        <option value="5">Medium Payload</option>
-                        <option value="6">Complex Payload</option>
-                        <option value="8">Standard Questions Payload</option>
-                        <option value="9">Complex Payload - Display Text</option>
-                        <option value="10">Complex Payload - Group Headers</option>
-                        <option value="11">Complex Payload - Nesting</option>
-                        <option value="12">Complex Payload - Nesting Error</option>
                     </select>
                 </div>
                 <div class="row">
@@ -58,7 +53,7 @@
                     When a QuestionnaireResponse is handled independent of its Questionnaire, there are 4 types of data to format differently on-screen to a user:</br>                  
                     
                 </br><b>1. Standard Questions:</b> Use item.text for the question, and item.answer[] for the answer(s). <span style="color: crimson; background-color: rgb(255, 213, 213);"> no item.item[] allowed</span></br>
-                </br><b>2. Nested Questions (and groups):</b> In a standard question item, put the nested questions into item.answer[].item[]. <span style="color: crimson; background-color: rgb(255, 213, 213);">no item.item[] allowed</span></br>
+                </br><b>2. Sub-Question Questions (and groups):</b> In a standard question item, put the nested questions into item.answer[].item[]. <span style="color: crimson; background-color: rgb(255, 213, 213);">no item.item[] allowed</span></br>
                 </br><b>3. Group Questions: (and groups)</b> Use item.text for the header text, and include its grouped questions in item.item[]. <span style="color: crimson; background-color: rgb(255, 213, 213);">no item.answer[] allowed</span></br>
                 </br><b>4. Display Text:</b> Use item.text for the header text, without item.item[] and without item.answer[].</br>
                     
@@ -66,7 +61,7 @@
                 <p>
                     For display format in the QuestionaireResponse formatter:
                     1) standard questions are displayed as {bold}-question : {normal}-answer
-                    2) nested questions are indented
+                    2) sub-questions questions are indented
                     3) group headers are large header style
                     4) display-text are italics
       
