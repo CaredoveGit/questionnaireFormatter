@@ -53,7 +53,7 @@
                     When a QuestionnaireResponse is handled independent of its Questionnaire, there are 4 types of data to format differently on-screen to a user:</br>                  
                     
                 </br><b>1. Standard Questions:</b> Use item.text for the question, and item.answer[] for the answer(s). <span style="color: crimson; background-color: rgb(255, 213, 213);"> no item.item[] allowed</span></br>
-                </br><b>2. Sub-Question Questions (and groups):</b> In a standard question item, put the sub-questions into item.answer[].item[]. <span style="color: crimson; background-color: rgb(255, 213, 213);">no item.item[] allowed</span></br>
+                </br><b>2. Sub-Questions (and groups):</b> In a standard question item, put the sub-questions into item.answer[].item[]. <span style="color: crimson; background-color: rgb(255, 213, 213);">no item.item[] allowed</span></br>
                 </br><b>3. Group Questions: (and groups)</b> Use item.text for the header text, and include its grouped questions in item.item[]. <span style="color: crimson; background-color: rgb(255, 213, 213);">no item.answer[] allowed</span></br>
                 </br><b>4. Display Text:</b> Use item.text for the header text, without item.item[] and without item.answer[].</br>
                     
@@ -61,7 +61,7 @@
                 <p>
                     For display format in the QuestionaireResponse formatter:
                     1) standard questions are displayed as {bold}-question : {normal}-answer
-                    2) sub-questions are indented
+                    2) sub-questions are indented 
                     3) group headers are large header style
                     4) display-text are italics
       
