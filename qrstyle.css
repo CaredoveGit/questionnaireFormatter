@@ -86,7 +86,9 @@ button {
 .answer {
     font-weight: normal;
 }
-
+.text {
+    color: #3d3d3d;
+}
 section {
     width: 50%;
     margin: 3em auto;
