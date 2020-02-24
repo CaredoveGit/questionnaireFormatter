@@ -88,6 +88,7 @@ button {
 }
 .text {
     color: #888888;
+    font-style: italic;
 }
 section {
     width: 50%;
