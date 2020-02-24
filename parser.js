@@ -131,7 +131,7 @@ function populateResponse(jsonObj) {
                     {
                         pitemid = item[0].linkID;
                     }
-                    else (item[0].linkId!==undefined)                    
+                    else if(item[0].linkId!==undefined)                    
                     {
                         pitemid = item[0].linkId;
                     }
