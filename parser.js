@@ -120,14 +120,14 @@ function populateResponse(jsonObj) {
     const parseItem = (item, depth) => {
         item.forEach(i => {
             // non-headers
-            if (i.answer) {
+            if (i.answer) {2
                 let line = renderQuestion(i, depth);
                 qrSection.appendChild(line);
                 //Check for rule error - (answer.exists() and item.exists()).not()
                 if (i.item) 
                 {
                     errsource = '';
-                    if(item[0].linkID)
+                    if(item[0].hasAttribute("linkID"))
                     {
                         pitemid = item[0].linkID;
                     }else
