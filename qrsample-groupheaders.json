@@ -1,0 +1,179 @@
+{
+  "status" : "completed",
+  "basedOn" : [
+    {
+      "reference" : "ServiceRequest/365985"
+    }
+  ],
+  "id" : "7674cab2-cc1f-4f7c-969d-62a4988501e9",
+  "identifier" : [
+    {
+      "system" : "http://example.org/fhir/NamingSystem/questionnaire-ids",
+      "value" : "414692"
+    }
+  ],
+  "authored" : "2019-08-27T21:33:34Z",
+  "resourceType" : "QuestionnaireResponse",
+  "item" : [
+    {
+      "linkId" : "3",
+      "text" : "Question 1.0.0",
+      "answer" : [
+        {
+          "valueString" : "Answer 1.0.1",
+          "status" : "completed",
+          "basedOn" : [
+            {
+              "reference" : "ServiceRequest/365985"
+            }
+          ],
+          "id" : "7674cab2-cc1f-4f7c-969d-62a4988501e9",
+          "identifier" : [
+            {
+              "system" : "http://example.org/fhir/NamingSystem/questionnaire-ids",
+              "value" : "414692"
+            }
+          ],
+          "authored" : "2019-08-27T21:33:34Z",
+          "resourceType" : "QuestionnaireResponse",
+          "item" : [
+            {
+              "linkId" : "A",
+              "text" : "Section A Header",
+              "item" : [
+                {
+                  "answer" : [
+                    {
+                      "valueString" : "Answer A1"
+                    }
+                  ],
+                  "text" : "Question A1",
+                  "linkID" : "A1"
+                },
+                {
+                  "answer" : [
+                    {
+                      "valueString" : "Answer A2"
+                    }
+                  ],
+                  "text" : "Question A2",
+                  "linkID" : "A2"
+                }
+              ]
+            },
+            {
+              "linkId" : "B",
+              "text" : "Section B Header",
+              "item" : [
+                {
+                  "answer" : [
+                    {
+                      "valueString" : "Answer B1"
+                    }
+                  ],
+                  "text" : "Question B1",
+                  "linkID" : "B1"
+                },
+                {
+                  "answer" : [
+                    {
+                      "valueString" : "Answer B2"
+                    }
+                  ],
+                  "text" : "Question B2",
+                  "linkID" : "B2"
+                },
+                {
+                  "item" : [
+                    {
+                      "answer" : [
+                        {
+                          "valueString" : "Answer C1"
+                        }
+                      ],
+                      "text" : "Answer C1",
+                      "linkID" : "B3"
+                    }
+                  ],
+                  "text" : "Subsection C Header",
+                  "linkID" : "B3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "item" : [
+            {
+              "linkId" : "3.1",
+              "text" : "Question 1.1.0",
+              "answer" : [
+                {
+                  "valueString" : "Answer 1.1.0"
+                }
+              ]
+            },
+            {
+              "linkId" : "3.2",
+              "text" : "Question 1.2.0",
+              "answer" : [
+                {
+                  "valueString" : "Answer 1.2.0"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId" : "3",
+      "text" : "Question 2.0.0",
+      "answer" : [
+        {
+          "valueString" : "Answer 2.0.0",
+          "item" : [
+            {
+              "linkId" : "3.1",
+              "text" : "Question 2.1.0",
+              "answer" : [
+                {
+                  "valueString" : "Answer 2.1.0"
+                }
+              ]
+            },
+            {
+              "linkId" : "3.2",
+              "text" : "Question 2.2.0",
+              "answer" : [
+                {
+                  "valueString" : "Answer 2.2.0",
+                  "item" : [
+                    {
+                      "linkId" : "3.1",
+                      "text" : "Question 2.2.1",
+                      "answer" : [
+                        {
+                          "valueString" : "Answer 2.2.1"
+                        }
+                      ]
+                    },
+                    {
+                      "linkId" : "3.2",
+                      "text" : "Question 2.2.2",
+                      "answer" : [
+                        {
+                          "valueString" : "Answer 2.2.2"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

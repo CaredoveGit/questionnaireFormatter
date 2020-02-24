@@ -1,0 +1,97 @@
+{
+  "status" : "completed",
+  "basedOn" : [
+    {
+      "reference" : "ServiceRequest\/365985"
+    }
+  ],
+  "id" : "7674cab2-cc1f-4f7c-969d-62a4988501e9",
+  "identifier" : [
+    {
+      "system" : "http:\/\/example.org\/fhir\/NamingSystem\/questionnaire-ids",
+      "value" : "414692"
+    }
+  ],
+  "authored" : "2019-08-27T21:33:34Z",
+  "resourceType" : "QuestionnaireResponse",
+  "item" : [
+    {
+      "linkId" : "3",
+      "text" : "Question 1.0.0",
+      "answer" : [
+        {
+          "valueString" : "Answer 1.0.1",
+          "item" : [
+            {
+              "linkId" : "3.1",
+              "text" : "Question 1.1.0",
+              "answer" : [
+                {
+                  "valueString" : "Answer 1.1.0"
+                }
+              ]
+            },
+            {
+              "linkId" : "3.2",
+              "text" : "Question 1.2.0",
+              "answer" : [
+                {
+                  "valueString" : "Answer 1.2.0"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId" : "3",
+      "text" : "Question 2.0.0",
+      "answer" : [
+        {
+          "valueString" : "Answer 2.0.0",
+          "item" : [
+            {
+              "linkId" : "3.1",
+              "text" : "Question 2.1.0",
+              "answer" : [
+                {
+                  "valueString" : "Answer 2.1.0"
+                }
+              ]
+            },
+            {
+              "linkId" : "3.2",
+              "text" : "Question 2.2.0",
+              "answer" : [
+                {
+                  "valueString" : "Answer 2.2.0",
+                  "item" : [
+                    {
+                      "linkId" : "3.1",
+                      "text" : "Question 2.2.1",
+                      "answer" : [
+                        {
+                          "valueString" : "Answer 2.2.1"
+                        }
+                      ]
+                    },
+                    {
+                      "linkId" : "3.2",
+                      "text" : "Question 2.2.2",
+                      "answer" : [
+                        {
+                          "valueString" : "Answer 2.2.2"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

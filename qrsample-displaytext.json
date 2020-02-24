@@ -1,0 +1,30 @@
+{
+    "status" : "completed",
+    "id" : "123456",
+    "resourceType" : "QuestionnaireResponse",
+    "item" : [
+      {
+        "linkId" : "item45518187",
+        "text" : "This is display text, that might be used in a pre-amble or other descriptive section of a form and included on a QuestionnaireResponse. Note that display items cannot have items or answers."
+      },
+      {
+        "linkId" : "q1",
+        "text" : "Question 1:",
+        "answer" : [
+          {
+            "valueString" : "Answer 1"
+          }
+        ]
+      },
+      {
+        "linkId" : "q2",
+        "text" : "Question 2:",
+        "answer" : [
+          {
+            "valueString" : "Answer 2"
+          }
+        ]
+      }
+    ],
+    "authored" : "2020-02-14T11:15:53-05:00"
+}

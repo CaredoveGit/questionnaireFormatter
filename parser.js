@@ -14,7 +14,12 @@ const qrSampleSimpleRequestURL = 'qrsample-simple.json';
 const qrSampleMediumRequestURL = 'qrsample-medium.json';
 const qrSampleComplexRequestURL = 'qrsample-complex.json';
 const qrFHIRNorth2019ExerciseURL = 'fhirnorth2019.json';
-const qrSampleComplexNestRequestURL = 'qrsample-complex-nest.json';
+const qrSampleStandardURL = 'qrsample-standard-question.json';
+const qrSampleDisplayTextURL = 'qrsample-displaytext.json';
+const qrSampleGroupHeadersURL = 'qrsample-groupheaders.json';
+const qrSampleNestedURL = 'qrsample-nestedquestions.json';
+const qrSampleNestedErrorUrl = 'qrsample-complex-nest.json';
+
 
 getJSONData(qrSampleRequestURL);
 
@@ -59,7 +64,19 @@ qrDropdownBox.addEventListener('change', event => {
         getJSONData(qrSampleComplexRequestURL);
     }
     if (result == 8) {
-        getJSONData(qrSampleComplexNestRequestURL);
+        getJSONData(qrSampleStandardURL);
+    }
+    if (result == 9) {
+        getJSONData(qrSampleDisplayTextURL);
+    }
+    if (result == 10) {
+        getJSONData(qrSampleGroupHeadersURL);
+    }
+    if (result == 11) {
+        getJSONData(qrSampleNestedURL);
+    }
+    if (result == 12) {
+        getJSONData(qrSampleNestedErrorUrl);
     }
 });
 
@@ -107,17 +124,18 @@ function populateResponse(jsonObj) {
                 let line = renderQuestion(i, depth);
                 qrSection.appendChild(line);
                 //Check for rule error - (answer.exists() and item.exists()).not()
-                if (i.answer[0].hasOwnProperty('item') && i.item) {
-                errsource = '';
-                if(item[0].linkID)
+                if (i.item) 
                 {
-                    pitemid = item[0].linkID;
-                }else
-                {
-                    pitemid = item[0].linkId;
-                }
-                errsource = '<table width="35%" ><tr><td><i>Items in Error</i></td><td><b>linkID</b></td></tr><tr><td width="75%"><b>Parent Item</b></td><td>'+pitemid+'</td></tr><tr><td>'+'<b>SubItem</b></td><td>'+i.item[0].linkID+'</td></tr><tr><td>'+'<b>Answer SubItem</b></td><td>'+i.answer[0].item[0].linkID+'</td></tr></table>'
-                   errors.push('An answer cannot have a child item at the same time the answer parent item has a child item. </br> A Nested item cannot be beneath both item and answer.</br></br>'+errsource+'</br> Please review this guideline for more information:</br> <a href="https://www.hl7.org/fhir/questionnaireresponse.html#invs" target="_blank">FHIR Questionnaire Respsonse</a>')
+                    errsource = '';
+                    if(item[0].linkID)
+                    {
+                        pitemid = item[0].linkID;
+                    }else
+                    {
+                        pitemid = item[0].linkId;
+                    }
+                    errsource = '<table width="35%" ><tr><td><i>Items in Error</i></td><td><b>linkID</b></td></tr><tr><td width="75%"><b>Parent Item</b></td><td>'+pitemid+'</td></tr><tr><td>'+'<b>SubItem</b></td><td>'+i.item[0].linkID+'</td></tr></table>'
+                    errors.push('An answer cannot have a child item at the same time the answer parent item has a child item. </br> A Nested item cannot be beneath both item and answer.</br></br>'+errsource+'</br> Please review this guideline for more information:</br> <a href="https://www.hl7.org/fhir/questionnaireresponse.html#invs" target="_blank">FHIR Questionnaire Respsonse</a>')
                 }
                 if (i.answer[0].hasOwnProperty('item')) {
                     let answer = renderAnswer(i.answer[0], depth);

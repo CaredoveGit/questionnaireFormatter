@@ -1,0 +1,46 @@
+{
+    "status" : "completed",
+    "author" : {
+      "reference" : "PractitionerRole\/p1bf1689-06b2-4b9d-b952-26d14551ef3p"
+    },
+    "basedOn" : [
+      {
+        "reference" : "ServiceRequest\/98f151c0-a954-468a-88bd-5ae15c08e059"
+      }
+    ],
+    "id" : "f2tf1689-06b2-4b9d-b952-26d14551ef3t",
+    "subject" : {
+      "reference" : "Patient\/04121321-4af5-424c-a0e1-ed3aab1c349d"
+    },
+    "authored" : "2013-02-19T14:15:00-05:00",
+    "resourceType" : "QuestionnaireResponse",
+    "item" : [
+      {
+        "linkId" : "123456",
+        "text" : "Question 1",
+        "answer" : [
+          {
+            "valueString" : "Question 1"
+          }
+        ]
+      },
+      {
+        "linkId" : "234567",
+        "text" : "Question 2",
+        "answer" : [
+          {
+            "valueString" : "Question 2"
+          }
+        ]
+      },
+      {
+        "linkId" : "345678",
+        "text" : "Question 3",
+        "answer" : [
+          {
+            "valueString" : "Question 3"
+          }
+        ]
+      }
+    ]
+  }
