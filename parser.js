@@ -234,7 +234,7 @@ function getAnswerText({
     valueAttachment,
     valueCoding,
     valueQuantity,
-    valueCalculate
+    valueCalculation
 }) {
     let response = '';
 
@@ -291,8 +291,8 @@ function getAnswerText({
     if (typeof valueQuantity !== 'undefined') {
         response += valueQuantity;
     }
-    if (typeof valueCalculate !== 'undefined') {
-        response += valueCalculate;
+    if (typeof valueCalculation !== 'undefined') {
+        response += valueCalculation;
     }
 
     return response;
