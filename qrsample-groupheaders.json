@@ -2,13 +2,13 @@
   "status" : "completed",
   "basedOn" : [
     {
-      "reference" : "ServiceRequest\/365985"
+      "reference" : "ServiceRequest/365985"
     }
   ],
   "id" : "7674cab2-cc1f-4f7c-969d-62a4988501e9",
   "identifier" : [
     {
-      "system" : "http:\/\/example.org\/fhir\/NamingSystem\/questionnaire-ids",
+      "system" : "http://example.org/fhir/NamingSystem/questionnaire-ids",
       "value" : "414692"
     }
   ],
@@ -65,21 +65,20 @@
                       "answer" : [
                         {
                           "valueString" : "Answer C1"
-                          
                         }
                       ],
                       "text" : "Question C1",
                       "linkID" : "B3"
                     },
-                      {
-                        "linkId" : "3.1",
-                        "text" : "Question C2",
-                        "answer" : [
-                          {
-                            "valueString" : "Answer C2"
-                          }
-                        ]
-                      }
+                    {
+                      "linkId" : "3.1",
+                      "text" : "Question C2",
+                      "answer" : [
+                        {
+                          "valueString" : "Answer C2"
+                        }
+                      ]
+                    }
                   ]
                 }
               ]

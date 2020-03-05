@@ -233,7 +233,8 @@ function getAnswerText({
     valueUri,
     valueAttachment,
     valueCoding,
-    valueQuantity
+    valueQuantity,
+    valueCalculate
 }) {
     let response = '';
 
@@ -289,6 +290,9 @@ function getAnswerText({
 
     if (typeof valueQuantity !== 'undefined') {
         response += valueQuantity;
+    }
+    if (typeof valueCalculate !== 'undefined') {
+        response += valueCalculate;
     }
 
     return response;
