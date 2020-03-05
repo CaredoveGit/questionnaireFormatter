@@ -292,7 +292,7 @@ function getAnswerText({
         response += valueQuantity;
     }
     if (typeof valueCalculation !== 'undefined') {
-        response += valueCalculation;
+        response += String(valueCalculation);
     }
 
     return response;
