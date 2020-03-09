@@ -128,6 +128,7 @@ function populateResponse(jsonObj) {
                 if (i.item) 
                 {
                     errsource = '';
+                    subitemid = '';
                     if(item[counter].linkID!==undefined)
                     {
                         pitemid = item[counter].linkID;
