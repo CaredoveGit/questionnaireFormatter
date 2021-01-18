@@ -154,6 +154,7 @@ function populateResponse(jsonObj) {
                 if (i.answer[0].hasOwnProperty('item')) {
                     let answer = renderAnswer(i.answer[0], depth);
                     line.appendChild(answer);
+                    
                 }
                 parseAnswer(i.answer, line, depth + 1);
                  
@@ -215,6 +216,11 @@ function populateResponse(jsonObj) {
                     let answerHTML = renderAnswer(e, depth);
                     line.appendChild(answerHTML);
                 }
+                if (typeof e.scoreInteger !== 'undefined') {
+                        if (Number.isInteger(e.scoreInteger)) {
+                            line.append(renderScore(e.scoreInteger));
+                        }
+                    }
             }
         });
     };
@@ -382,7 +388,21 @@ function renderMultiAnswer(obj) {
 
     return answer;
 }
+function renderScore(scoreint)
+{
+    let scoreimg = document.createElement('img');
 
+    if(scoreint > 0) {
+        scoreimg.src = 'ok.png';
+        scoreimg.width=15;
+    }
+    else
+    {
+        scoreimg.src = 'cancel.png';
+        scoreimg.width=15;
+    }
+    return scoreimg;
+}
 // Remove the previous JSON data from the page so new data can be displayed
 function clearJSONResults() {
     while (qrSection.firstChild) {
