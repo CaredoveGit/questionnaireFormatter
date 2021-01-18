@@ -374,7 +374,7 @@ normal style applied, to remove any bolding, and then returns the answer as an o
 function renderAnswer(obj, depth) {
     let answer = document.createElement('span');
     answer.classList.add('answer');
-    answer.textContent = getAnswerText(obj);
+    answer.textContent = getAnswerText(obj)+ ' ';;
 
     return answer;
 }
