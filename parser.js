@@ -3,7 +3,6 @@ var qrSection = document.getElementById('QuestionnaireResponse');
 var qrJSONInput = document.getElementById('jsonInput');
 var qrSubmitButton = document.getElementById('submit');
 var qrDropdownBox = document.getElementById('jsonDropdown');
-var qrRuleErrorDiv = document.getElementById('ruleErrorDiv');
 var errors = [];
 
 // Initial JSON load
@@ -14,12 +13,6 @@ const qrSampleSimpleRequestURL = 'qrsample-simple.json';
 const qrSampleMediumRequestURL = 'qrsample-medium.json';
 const qrSampleComplexRequestURL = 'qrsample-complex.json';
 const qrFHIRNorth2019ExerciseURL = 'fhirnorth2019.json';
-const qrSampleStandardURL = 'qrsample-standard-question.json';
-const qrSampleDisplayTextURL = 'qrsample-displaytext.json';
-const qrSampleGroupHeadersURL = 'qrsample-groupheaders.json';
-const qrSampleNestedURL = 'qrsample-nestedquestions.json';
-const qrSampleNestedErrorUrl = 'qrsample-complex-nest.json';
-
 
 getJSONData(qrSampleRequestURL);
 
@@ -63,20 +56,8 @@ qrDropdownBox.addEventListener('change', event => {
     if (result == 6) {
         getJSONData(qrSampleComplexRequestURL);
     }
-    if (result == 8) {
-        getJSONData(qrSampleStandardURL);
-    }
-    if (result == 9) {
-        getJSONData(qrSampleDisplayTextURL);
-    }
-    if (result == 10) {
-        getJSONData(qrSampleGroupHeadersURL);
-    }
-    if (result == 11) {
-        getJSONData(qrSampleNestedURL);
-    }
-    if (result == 12) {
-        getJSONData(qrSampleNestedErrorUrl);
+    if (result == 7) {
+        getJSONData(qrFHIRNorth2019ExerciseURL);
     }
 });
 
@@ -86,17 +67,10 @@ qrSubmitButton.addEventListener('click', function(event) {
 
     // Populate the page with new data taken from the textview
     let updateText = qrJSONInput.value;
-    try{
     let updatedJSON = JSON.parse(updateText);
     populateResponse(updatedJSON);
-    }
-    catch(err)
-    {
-        errors.push(err);
-        handleErrors();
-    }
-
 });
+
 /* Parse through the JSON file, checking for nested and conditional properties,
 then displaying all of the response contents to a section on the page */
 function populateResponse(jsonObj) {
@@ -104,7 +78,6 @@ function populateResponse(jsonObj) {
      *
      * @param {object} questionnaireResponse
      */
-
     const parse = questionnaireResponse => {
         if (questionnaireResponse.item) {
             parseItem(questionnaireResponse.item, 0);
@@ -117,56 +90,22 @@ function populateResponse(jsonObj) {
      *
      * @param {array} item
      */
-    counter = 0;
     const parseItem = (item, depth) => {
         item.forEach(i => {
             // non-headers
             if (i.answer) {
                 let line = renderQuestion(i, depth);
                 qrSection.appendChild(line);
-                //Check for rule error - (answer.exists() and item.exists()).not()
-                if (i.item) 
-                {
-                    errsource = '';
-                    subitemid = '';
-                    if(item[counter].linkID!==undefined)
-                    {
-                        pitemid = item[counter].linkID;
-                    }
-                    else if(item[counter].linkId!==undefined)                    
-                    {
-                        pitemid = item[counter].linkId;
-                    }
-                    if(i.item[0]!==undefined)
-                    {
-                        if(i.item[0].linkID!==undefined)
-                        {
-                            subitemid = i.item[0].linkID;
-                        }
-                        else if(i.item[0].linkId!==undefined)                    
-                        {
-                            subitemid = i.item[0].linkId;
-                        }
-                    }
-                    errsource = '<table width="35%" ><tr><td><i>Items in Error</i></td><td><b>linkID</b></td></tr><tr><td width="75%"><b>Parent Item</b></td><td>'+pitemid+'</td></tr><tr><td>'+'<b>SubItem</b></td><td>'+subitemid+'</td></tr></table>'
-                    errors.push('A QuestionnaireResponse.item may NOT have both an item and an answer.</br></br>'+errsource+'</br> Please review this guideline for more information:</br> <a href="https://www.hl7.org/fhir/questionnaireresponse.html#invs" target="_blank">FHIR Questionnaire Respsonse</a>')
-                }
+
                 if (i.answer[0].hasOwnProperty('item')) {
                     let answer = renderAnswer(i.answer[0], depth);
                     line.appendChild(answer);
                 }
                 parseAnswer(i.answer, line, depth + 1);
-                 
-            }else
-            {
-                if (!i.item) {
-                    let line = renderText(i, depth);
-                    qrSection.appendChild(line);
-                 }
             }
 
             if (i.item) {
-                 // headers
+                // headers
                 if (depth < 1) {
                     if (!i.answer) {
                         let line = renderHeader(i, depth);
@@ -189,10 +128,6 @@ function populateResponse(jsonObj) {
                 }
             }
         });
-        
-        if (depth < 1) {
-            counter = counter +1;
-        }
     };
 
     /**
@@ -203,7 +138,7 @@ function populateResponse(jsonObj) {
         answer.forEach(e => {
             if (e.item) {
                 // conditional sub-question
-                parseItem(e.item, depth);
+                parseItemWithSubQuestion(e.item, depth);
             } else {
                 // Multi-select answers
                 if (answer.length > 1 && answer.indexOf(e) != answer.length - 1) {
@@ -214,7 +149,56 @@ function populateResponse(jsonObj) {
                 } else {
                     let answerHTML = renderAnswer(e, depth);
                     line.appendChild(answerHTML);
+
                 }
+                if (typeof e.scoreInteger !== 'undefined') {
+                    if (Number.isInteger(e.scoreInteger)) {
+                        line.append(renderScore(e.scoreInteger));
+                    }
+                }
+            }
+        });
+    };
+
+    /**
+     *
+     * @param {object} item
+     * @param {integer} depth
+     */
+    const parseItemWithSubQuestion = (item, depth) => {
+        console.log('Depth: %s', depth.toString());
+        console.log('ITEM WITH SUB QUESTION');
+
+        item.forEach(i => {
+            if (i.answer) {
+                // sub-questions and answers
+                let line = renderQuestion(i, depth);
+                line.style.marginLeft = (depth * 2).toString() + 'em';
+                qrSection.appendChild(line);
+
+                i.answer.forEach(e => {
+                    // Multi-select answers
+                    if (i.answer.length > 1 && i.answer.indexOf(e) != i.answer.length - 1) {
+                        let answerHTML = renderMultiAnswer(e, depth);
+                        line.appendChild(answerHTML);
+
+                        // Single answers
+                    } else {
+                        let answerHTML = renderAnswer(e, depth);
+                        line.appendChild(answerHTML);
+
+                    }
+                    if (typeof e.scoreInteger !== 'undefined') {
+                        if (Number.isInteger(e.scoreInteger)) {
+                            line.append(renderScore(e.scoreInteger));
+                        }
+                    }
+                });
+                console.log('SUB ITEM ANSWER RENDERED');
+            }
+
+            if (i.item) {
+                // parseItem(i.item, depth + 1);
             }
         });
     };
@@ -238,7 +222,7 @@ function getAnswerText({
     valueAttachment,
     valueCoding,
     valueQuantity,
-    valueCalculation
+    scoreInteger
 }) {
     let response = '';
 
@@ -295,9 +279,6 @@ function getAnswerText({
     if (typeof valueQuantity !== 'undefined') {
         response += valueQuantity;
     }
-    if (typeof valueCalculation !== 'undefined') {
-        response += String(valueCalculation);
-    }
 
     return response;
 }
@@ -326,19 +307,6 @@ function renderQuestion(obj, depth) {
     return line;
 }
 
-function renderText(obj, depth) {
-    console.log('Depth: %s', depth.toString());
-    let { text } = obj;
-    let line = document.createElement('p');
-    line.style.marginLeft = (depth * 2).toString() + 'em';
-    let textblock = document.createElement('span');
-    textblock.classList.add('text');
-    textblock.textContent = text ;
-    
-    line.appendChild(textblock);
-
-    return line;
-}
 /**
  * Takes an item object, displays a header on the page, creating an h1 element,
  * and then returning the header as an object
@@ -368,7 +336,7 @@ normal style applied, to remove any bolding, and then returns the answer as an o
 function renderAnswer(obj, depth) {
     let answer = document.createElement('span');
     answer.classList.add('answer');
-    answer.textContent = getAnswerText(obj);
+    answer.textContent = getAnswerText(obj) + ' ';
 
     return answer;
 }
@@ -378,9 +346,25 @@ with a normal style applied, to remove any bolding, adding a comma at the end, a
 returns the answer as an object */
 function renderMultiAnswer(obj) {
     let answer = document.createElement('span');
-    answer.textContent = getAnswerText(obj) + ', ';
+    answer.textContent = getAnswerText(obj) + ',';
 
     return answer;
+}
+
+function renderScore(scoreint)
+{
+    let scoreimg = document.createElement('img');
+
+    if(scoreint > 0) {
+        scoreimg.src = 'ok.png';
+        scoreimg.width=15;
+    }
+    else
+    {
+        scoreimg.src = 'cancel.png';
+        scoreimg.width=15;
+    }
+    return scoreimg;
 }
 
 // Remove the previous JSON data from the page so new data can be displayed
@@ -398,16 +382,21 @@ function handleErrors() {
         console.log(errors);
         clearJSONResults();
 
-        if (errors.length > 0) {
+        if (errors.length > 1) {
             let line = document.createElement('h1');
             line.textContent = errors.length.toString() + ' errors were detected:';
             line.style.color = 'red';
             qrSection.appendChild(line);
-        } 
+        } else {
+            let line = document.createElement('h1');
+            line.textContent = errors.length.toString() + ' error was detected:';
+            line.style.color = 'red';
+            qrSection.appendChild(line);
+        }
 
         errors.forEach(e => {
             let line = document.createElement('p');
-            line.innerHTML = e;
+            line.textContent = e;
             line.style.color = 'red';
             let question = document.createElement('span');
             question.classList.add('question');
